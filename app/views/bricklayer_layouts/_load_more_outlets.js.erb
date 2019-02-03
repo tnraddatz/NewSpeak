@@ -1,0 +1,20 @@
+//This file is called upon when the "load-more" button is pressed
+//The ajax request: load_more.js is what calls it
+//The function of this file is to update the bricklayer object in the DOM
+<% if @outlets.blank? %>
+  $('#load-more').remove()
+  $('#loading-gif').remove()
+  $('#complete').show()
+<% else %>
+
+var outlets_array = [];
+<% @outlets.each do |outlet| %>
+  var new_card = document.createElement("div");
+  new_card.className = "card";
+  new_card.innerHTML= "<%= escape_javascript render 'bricklayer_layouts/append_outlets.html.erb', outlet: outlet %>";
+  outlets_array.push(new_card);
+<% end %>
+
+bricklayer.append(outlets_array);
+document.getElementById("data-container").value = "<%= @outlets.last.outlet_name %>";
+<% end %>

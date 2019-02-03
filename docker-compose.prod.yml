@@ -1,0 +1,65 @@
+version: "3"
+
+volumes:
+  assets:
+    external: false
+  configs:
+    external: false
+  db-data:
+    external: false
+
+services:
+  webserver:
+    image: "nginx:1.11.8"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - assets:/usr/share/nginx/html
+      - configs:/etc/nginx/conf.d
+
+  prod_db:
+      image: postgres:10.6
+      env_file: .env.prod
+      volumes:
+        - db-data:/var/lib/postgresql/db-data
+
+  prod_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    env_file: .env.prod
+    ports:
+      - "3000:3000"
+    volumes:
+      - assets:/usr/share/nginx/html
+      - configs:/etc/nginx/conf.d
+    depends_on:
+      - prod_db
+      - webserver
+    logging:
+      driver: gelf
+      options:
+        gelf-address: 'udp://localhost:12201'
+
+  logstash:
+    build: logstash/
+    command: logstash -f /etc/logstash/conf.d/logstash.conf
+    ports:
+      - "12201:12201/udp"
+
+  elasticsearch:
+    image: elasticsearch:5.6.14
+    command: elasticsearch -Enetwork.host=0.0.0.0
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - /usr/share/elasticsearch/data
+
+  kibana:
+    build: kibana/
+    ports:
+      - "5601:5601"

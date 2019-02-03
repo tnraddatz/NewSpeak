@@ -1,0 +1,62 @@
+<% content_for :bricklayer do %>
+  <% provide(:title, 'Home') %>
+<div id="home-container">
+    <div class="row">
+      <!-- left side carousel -->
+      <div class="col-lg-6 top-padding">
+        <div class="container">
+          <div id="slide" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ul class="carousel-indicators">
+                <li data-target="#slide" data-slide-to="0" class="active"></li>
+                <li data-target="#slide" data-slide-to="1"></li>
+                <li data-target="#slide" data-slide-to="2"></li>
+              </ul>
+
+              <!-- The slideshow -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <%= image_tag("content_slide.png", class: "center")%>
+                </div>
+                <div class="carousel-item">
+                  <%= image_tag("news_slide.png", class: "center")%>
+                </div>
+                <div class="carousel-item">
+                  <%= image_tag("sports_slide.png", class: "center")%>
+                </div>
+              </div>
+
+              <!-- Left and right controls -->
+              <a class="carousel-control-prev" href="#slide" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </a>
+              <a class="carousel-control-next" href="#slide" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </a>
+          </div>
+        </div>
+      </div>
+      <!-- right side outlets -->
+      <div class="col-lg-6 top-padding">
+        <h1 id="blue-background"> Head to the <%=link_to "Outlets", outlets_path %> Page to Customize Content </h1>
+        <div class="scroll-container testimonial-group">
+          <div class="row text-center flex-nowrap">
+            <% if @outlet_images.present? %>
+              <% @outlet_images.each do |imageurl| %>
+                <div class="col-sm-4"><%= image_tag(imageurl, class: "outlet-image")%></div>
+              <%end%>
+            <% else %>
+              <h2 class="top-padding" id="center"><p>There are No Current News Sources </p></h2>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  <div id="news-container">
+    <hr>
+    <div class="bricklayer">
+      <%= render 'bricklayer_layouts/default_news_articles.js.erb'%>
+    </div>
+  </div>
+<%end%>

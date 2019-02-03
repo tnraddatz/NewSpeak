@@ -1,0 +1,12 @@
+
+cnn:
+  outlet_name: "CNN"
+  imageurl: "https://besticon-demo.herokuapp.com/icon?url=www.cnn.com&size=70..120..200"
+  siteurl: "www.cnn.com"
+  total_records: 0
+
+fox:
+    outlet_name: "Fox News"
+    imageurl: "https://besticon-demo.herokuapp.com/icon?url=www.foxnews.com&size=70..120..200"
+    siteurl: "www.foxnews.com"
+    total_records: 0

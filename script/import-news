@@ -1,0 +1,19 @@
+#0,15,30,45 * * * * rails import:news
+#bundle install --path vendor/cache
+#kill -9 $(cat /var/run/crond.pid)
+#service cron restart
+#cat > /etc/cron.d/import-news
+#* * * * * /bin/bash -l -c 'cd /usr/src/app && RAILS_ENV=production bundle exec rake import:news >> /var/log/cron.log 2>&1'
+#crontab /etc/cron.d/import-news
+#cron
+#tail -f /var/log/cron.log
+
+#WHENEVER GEM
+#whenever --update-crontab
+#service cron restart
+#tail -f /var/log/cron.log
+
+#docker-machine create --driver=digitalocean --digitalocean-access-token=$DO_TOKEN --digitalocean-size=1gb meal-planner
+#eval $(docker-machine env meal-planner)
+#script/prod build prod_app
+#etc ...

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title><%= yield(:title) %></title>
+      <%= favicon_link_tag 'logo.png' %>
+      <%= render 'layouts/rails_default' %>
+      <%= render 'layouts/shim' %>
+      <% if content_for?(:bricklayer)%>
+        <meta name="turbolinks-cache-control" content="no-cache">
+      <% end %>
+    </head>
+    <body>
+          <%= render 'layouts/header' %>
+          <%= render 'layouts/message_alert' %>
+
+          <% if content_for?(:bricklayer) %>
+            <%= render 'bricklayer_layouts/data_container', last_element: nil %>
+            <%= yield(:bricklayer) %>
+            <%= render 'layouts/load_more' %>
+          <% else %>
+            <%= yield %>
+          <% end %>
+
+          <%= render 'layouts/footer' %>
+          <div class="container">
+            <%= debug(params) if Rails.env.development? %>
+          </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+$(document).on "turbolinks:load", ->
+  if $('.bricklayer').length
+    $(window).off('scroll')
+    isLoadingData = false
+    $(window).scroll ->
+      page_url = $('#load-more').attr('href')
+
+      #check if the last article call returned null
+      if page_url && !isLoadingData && $(window).scrollTop() > $(document).height() - $(window).height() - 50
+        isLoadingData = true
+        $('#load-more').hide()
+        $('#loading-gif').show()
+        #This function resides in published-at.js
+        data_container = $('#data-container').attr('value')
+        #Make an ajax call passing along our last published_at date
+
+        $.ajax
+            #Make a get request to the server
+            type: "GET",
+            #Get the url from the href attribute of our link
+            url: page_url,
+            #Send the last published_at time to our rails app
+            data:
+              feed_data: data_container,
+            #The response will be a script
+            dataType: "script",
+            #Upon success
+            success: ->
+                isLoadingData = false
+                $('#load-more').show()
+                $('#loading-gif').hide()
+
+    throttle($(window).scroll(), 500)

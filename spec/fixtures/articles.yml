@@ -1,0 +1,26 @@
+recent:
+  description: "This is a new article description"
+  outlet_name: "CNN"
+  author: "Thomas"
+  title: "This is a new article title"
+  url: "www.cnn.com/recent"
+  published_at: "2019-01-16 18:28:01 -0500"
+  outlet: cnn
+
+old:
+  description: "This is an old article description"
+  outlet_name: "CNN"
+  author: "Thomas"
+  title: "This is an old article title"
+  url: "www.cnn.com/old"
+  published_at: "2018-01-16 18:28:01 -0500"
+  outlet: cnn
+
+foxarticle:
+    description: "This is a fox article description"
+    outlet_name: "CNN"
+    author: "Thomas"
+    title: "This is a fox article title"
+    url: "www.foxnews.com/article"
+    published_at: "2017-01-16 18:28:01 -0500"
+    outlet: fox

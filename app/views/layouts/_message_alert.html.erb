@@ -1,0 +1,11 @@
+<div class="container">
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+      <div class="message">
+        <div data-alert class="alert alert-<%= name.to_s == 'notice' ? 'success' : 'danger' %>">
+          <h3><%= content_tag :div, msg %></h3>
+        </div>
+      </div>
+  <%end%>
+<%end%>
+</div>

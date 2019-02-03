@@ -1,0 +1,8 @@
+<!-- Will link to a "Load More" button that will be used by AJAX -->
+<div class="container center">
+  <%= link_to "Load More", '#', class: "btn btn-success", id: "load-more" %>
+  <%= image_tag "loading.gif", style: "display:none", id: "loading-gif" %>
+  <div class="alert alert-success" role="alert" style="display:none" id="complete">
+    <strong>Well done!</strong> You have seen it all.
+  </div>
+</div>

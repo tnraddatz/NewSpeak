@@ -1,0 +1,19 @@
+<a href="<%=outlet_path(outlet)%>">
+<div class="card-header">
+  <h5><%= outlet.outlet_name %></h5>
+</div>
+<div class="card-body">
+  <% unless outlet.imageurl.blank? %>
+    <%= image_tag(outlet.imageurl, class: "outlet-image center-outlet-image", alt: outlet.outlet_name) %>
+  <% end %>
+</a>
+  <footer class="footer no-margin">
+    <div class='center'>
+      <% if user_signed_in? %>
+        <%= render 'users/follow_form', outlet: outlet %>
+      <% else %>
+        <%= link_to("Login to Follow Outlets", new_user_session_path, class: "btn btn-info")%>
+      <% end %>
+    </div>
+  </footer>
+</div>

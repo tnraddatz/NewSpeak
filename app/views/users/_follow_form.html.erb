@@ -1,0 +1,7 @@
+<div id="follow_form_<%=outlet.id%>">
+  <% if current_user.following?(outlet) %>
+    <%= render 'users/unfollow.html.erb', outlet: outlet %>
+  <% else %>
+    <%= render 'users/follow.html.erb', outlet: outlet %>
+  <% end %>
+</div>

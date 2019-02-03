@@ -1,0 +1,10 @@
+<% content_for :bricklayer do %>
+  <% provide(:title, @title) %>
+  <h1> <%= @title %> </h1>
+  <div id="news-container">
+    <hr>
+    <div class="bricklayer">
+      <%= render 'bricklayer_layouts/default_outlets.js.erb'%>
+    </div>
+  </div>
+<% end %>

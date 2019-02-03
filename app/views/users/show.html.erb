@@ -1,0 +1,40 @@
+<% content_for :bricklayer do %>
+<% provide(:title, 'Profile') %>
+<!-- profile header -->
+<div id="profile-container">
+<div class="row">
+  <div class="col-md-3 top-padding right-border center">
+    <%= image_tag('logo.png', class: "profile-picture", alt:"User") %>
+    <h2 class="center top-padding"><%= @user.email %></h2>
+  </div>
+  <div class="col-md-9 top-padding">
+    <div class="scroll-container testimonial-group">
+      <div class="row text-center flex-nowrap">
+        <% if @outlet_image.present? %>
+          <% @outlet_image.each do |imageurl| %>
+            <div class="col-sm-4"><%= image_tag(imageurl, class: "outlet-image")%></div>
+          <%end%>
+        <% else %>
+          <h2 class=" top-padding" id="center"><p> You are not Currently Following any News Sources
+          <br> Follow News Sources on the <%=link_to "Outlets", outlets_path %> Page! </p></h2>
+        <%end%>
+      </div>
+    </div>
+    <div class='center top-padding'>
+      <%= render 'shared/stats' %>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- News Feed -->
+<div id="news-container">
+  <hr>
+  <div class="bricklayer">
+    <% if @articles.present? %>
+      <%= render 'bricklayer_layouts/default_news_articles.js.erb'%>
+    <%end%>
+  </div>
+</div>
+
+<%end%>
