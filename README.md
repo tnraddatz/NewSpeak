@@ -70,6 +70,7 @@ In doing research for this project, it was clear to me that a misunderstandings 
 
 ## About Section
 [Youtube](https://www.youtube.com/channel/UC3OhPHBA5fj0JPSBoLxjoHw) - [Linkedin](https://www.linkedin.com/in/thomas-raddatz-2432949b/) - [Github](https://github.com/tnraddatz)
+
 NewSpeak makes navigating the news easier.  With over 20+ News outlets and 10,000+ articles, the application delivers up-to-date news every 15 minutes, allowing users to view articles from multiple angles. This project was undertaken to serve as a hardcopy of my Ruby on Rails experience as well as its integrations with ELK, Docker, Digitial Ocean, and 3rd party APIs.
 
 A recent graduate of The College of William & Mary with a double major in Computer Science and Finance, I specialize in application and full-stack web development, with an interest in financial technology software. Throughout my four years at the College of William & Mary, I was an avid Ruby on Rails developer, building rails applications to compete in hack-a-thons and business competitions. Since graduating, I have continued my passion for web development with Ruby on Rails and in an effort to encapsulate some of my knowledge  into one project, I created “NewSpeak.”  
