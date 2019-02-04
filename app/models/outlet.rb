@@ -9,17 +9,17 @@ class Outlet < ApplicationRecord
 
 	#class methods
 	def self.preview_outlet_images(limit_num)
-		Outlet.limit(limit_num).pluck(:imageurl)
+	  Outlet.limit(limit_num).pluck(:imageurl)
 	end
 
 	#Instance Methods
 	#Show articles from a single outlet
 	def update_feed(published_at, limit_num)
-    Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles.where('articles.published_at < ?', published_at.to_datetime).references(:articles).limit(limit_num)
+     	  Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles.where('articles.published_at < ?', published_at.to_datetime).references(:articles).limit(limit_num)
 	end
 
-  #Show articles from a single outlet
-  def default_feed(limit_num)
-    Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles.limit(limit_num)
-  end
+  	#Show articles from a single outlet
+	def default_feed(limit_num)
+	  Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles.limit(limit_num)
+	end
 end
