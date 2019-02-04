@@ -1,5 +1,5 @@
 # NewSpeak
-NewSpeak makes navigating the news easier.  With over 20+ News outlets and 10,000+ articles, the application delivers up-to-date news every 15 minutes, allowing users to view articles from multiple angles. This project was undertaken to serve as a hardcopy of my Ruby on Rails experience as well as its integrations with ELK, Docker, Digitial Ocean, and 3rd party APIs.  Several different technologies and techniques were employed to ensure that test driven development and agile methodologies could serve as the basis for this project. At the helm of these technologies were Docker and RSpec. RSpec tests were written before any codedocker-compose -f docker-compose.prod.yml build prod_app was committed to their respective controllers, models or views. Ensuring that test driven development could guide the project. Docker was used to ensure a stable development environment, being employeed by pulling from the ruby, elasticsearch, logstash, and kibana Docker containers.
+[NewSpeak](www.thomasraddatz.com) makes navigating the news easier.  With over 20+ News outlets and 10,000+ articles, the application delivers up-to-date news every 15 minutes, allowing users to view articles from multiple angles. This project was undertaken to serve as a representation of my Ruby on Rails experience as well as its integrations with ELK, Docker, Digitial Ocean, and 3rd party APIs.  Several different technologies and techniques were employed to ensure that test driven development and agile methodologies could serve as the basis for this project. At the helm of this was Docker and RSpec. RSpec tests were written before any code was committed to their respective controllers, models or views. Ensuring that test driven development could guide the project. Docker was used to ensure a stable development environment, being employeed by pulling from the ruby, elasticsearch, logstash, and kibana Docker containers.
 
 The Javascript library "Bricklayer.js" was used in order to deliver an interactive and comfortable user experience. However, the use of this library in combination with Turbolinks resulted in some unexpected edge case behaviors. This behavior was cased by Turbolinks initializing the `bricklayer = new Bricklayer(document.querySelector('.bricklayer'));` either before or after the `div class="bricklayer"` was created.  In research of this issue, two important truths were discovered:
 ```
@@ -11,10 +11,10 @@ None of these events however could resolve the issue of destroying a bricklayer 
 Further, database methods were employed to demonstrate knowledge of the `.includes`, `.join`, and `.pluck`.  These methods are meant to serve as illustrations and are not meant to be premature optimizations.
 
 ## NewsAPI
-[NewsAPI](https://newsapi.org/) was used to deliver consistent news artciles to the PostgreSQL database. The API call and all subsequent actions to store articles and their respective outlets were contained within the NewsManager Services model.  This service consists of 6 classes: NewsApiCaller, ArticleSaver, OutletSaver, DuplicateOutlet, DatabaseTransactor, and NewsRetriever. Each of these classes are meant to serve a single purpose.
+[NewsAPI](https://newsapi.org/) was used to deliver consistent news articles to the PostgreSQL database. The API call and all subsequent actions to store articles and their respective outlets, were contained within the NewsManager Services model.  This service consists of 6 classes: NewsApiCaller, ArticleSaver, OutletSaver, DuplicateOutlet, DatabaseTransactor, and NewsRetriever. Each of these classes are meant to serve a single purpose.
 
 ## Infinite Scrolling
-A prominent feature of NewSpeak is its infinite scrolling capability.  In most scenarios I have used the ```will_paginate``` gem to accomplish this, but the gems use of  ```.offset().limit()``` bogged down preformance and was considered unacceptable for this project. In lieu of this, I rolled my own preformance sharp infinite scrolling.  The article's model has a class method ```self.update_feed(published_at, limit_num)``` that accepts the last article's ```published_at``` timestamp as a parameter and will execute:
+A prominent feature of NewSpeak is its infinite scrolling capability.  In other projects I have used the ```will_paginate``` gem to accomplish this, but the gems use of  ```.offset().limit()``` bogged down preformance and was considered unacceptable for this project. In lieu of this, I rolled my own preformance sharp infinite scrolling.  The article's model has a class method ```self.update_feed(published_at, limit_num)``` that accepts the last article's ```published_at``` timestamp as a parameter and will execute:
 ```
 Article.includes(:outlet).where('articles.published_at < ?', published_at.to_datetime).limit(limit_num)
 ```
@@ -23,7 +23,7 @@ Returning articles to the calling controller.  This method removes performance p
 # Technologies Used
 ## Deployment
 ### Docker
-Docker was used throughout the development cycle, from initially creating the application to eventually deploying the container on digital ocean.  I have become very familiar with Docker over the past year and feel very comfortable using it for small to medium sized projects. This rails application uses two docker-compose and Dockerfiles, both for development or production.  The production version of these files incorporates an NGINX server, which is used to preprocess assets and handle requests.
+Docker was used throughout the development cycle, from initially creating the application to eventually deploying the container on digital ocean.  I have become very familiar with Docker over the past year and feel very comfortable using it for small sized projects. This rails application uses two docker-compose and Dockerfiles, for development or production purposes.  The production version of these files incorporates an NGINX server, which is used to preprocess assets and handle requests.
 
 ### Digital Ocean
 Docker deploys its container to Digital Ocean and creates a droplet.  For this project, only one droplet was used, but in the near future the project may expand to utilize multiple droplets and load balancers.  Digital Ocean was chosen over AWS because of its simple deployment and pricing plans.  
@@ -37,7 +37,7 @@ Prior to this application, I had no experience with Capybara.  Though it is not 
 
 ## Logging
 ### ELK Stack  
-Logstash collects and parses logs, Elasticsearch indexes and stores the information and Kibana presents the data in visualizations that provide actionable insights into one’s environment. All data is sent to logstash through lograge, in order to keep logs simple and easy to understand.  In Kibana I have created several different types of visualizations to parse data: number of active users, guest users, errors recieved, and most frequent news outlets selected.
+Logstash collects and parses logs, Elasticsearch indexes and stores the information, Kibana presents the data in visualizations that provide actionable insights into one’s environment. All data is sent to logstash through lograge, in order to keep logs simple and easy to understand.  Within the Kibana interface I have created several different types of visualizations to parse data: number of active users, guest users, errors recieved, and most frequent news outlets selected.
 
 ### Lograge
 On their own, rails logs are pretty useless.  They contain a large amount of data and present it in an unreadable way.  To tame this, I use [Lograge](https://github.com/roidrage/lograge).  As an example, Lograge transforms the following rails log:
@@ -66,7 +66,7 @@ In doing research for this project, it was clear to me that a misunderstandings 
 
 ## Javascript Libraries
 ### Bricklayer.js
-Bricklayer is a responsive lightweight and independent cascading grid layout library.  It was chosen to allow articles to be easily appending or prepended to the DOM with worring about changes to the screen size or length of each card column. Furthermore, it appends articles to the DOM in a horizontal manner, placing newly appended cards next to one another, rather than below one another, as does Bootstrap 4 card-columns.
+[Bricklayer](https://github.com/ademilter/bricklayer) is a responsive lightweight and independent cascading grid layout library.  It was chosen to allow articles to be easily appending or prepended to the DOM without worring about changes to the screen size or length of each card column. Furthermore, it appends articles to the DOM in a horizontal manner, placing newly appended cards next to one another, rather than below one another, as does Bootstrap 4 card-columns.
 
 ## About Section
 NewSpeak makes navigating the news easier.  With over 20+ News outlets and 10,000+ articles, the application delivers up-to-date news every 15 minutes, allowing users to view articles from multiple angles. This project was undertaken to serve as a hardcopy of my Ruby on Rails experience as well as its integrations with ELK, Docker, Digitial Ocean, and 3rd party APIs.
