@@ -35,7 +35,7 @@ module NewsManager
 				}
 			end
 			#Change this to log output
-			updateString = amountAddedToDatabase.to_s + " records added to database"
+			updateString = amountAddedToDatabase.to_s 
 			#puts updateString
 			return updateString
 	  end

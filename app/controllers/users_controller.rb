@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = "Following"
     @user  = User.find(params[:id])
     @outlets = @user.fetch_outlets(outlet: params[:feed_data])
     respond_to :html, :js

@@ -435,6 +435,13 @@ input {
 /*IMAGES ARE 800x500 gimp edited photos */
 .carousel-inner img {
   margin: auto;
-  height: 400px;
+  height: 100%;
   width: 100%;
+}
+
+#center-carousel{
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: auto;
+  padding-bottom: auto;
 }
