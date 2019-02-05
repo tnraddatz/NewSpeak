@@ -1,30 +1,14 @@
  class OutletsController < ApplicationController
 
     def index
-      if params[:feed_data]
-        @outlets = Outlet.where("outlet_name > ?", params[:feed_data])
-      else
-        @outlets = Outlet.limit(5)
-      end
-
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @outlets = Outlet.fetch_outlets(outlet: params[:feed_data], limit_num: 6)
+      respond_to :html, :js
     end
 
     def show
       @outlet = Outlet.find(params[:id])
-      if params[:feed_data]
-        @articles = @outlet.update_feed(params[:feed_data], 5)
-      else
-        @articles = @outlet.default_feed(10)
-      end
-
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      @articles = @outlet.fetch_articles(published_before: params[:feed_data])
+      respond_to :html, :js
     end
 
 end

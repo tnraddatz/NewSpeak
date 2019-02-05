@@ -27,11 +27,11 @@ RSpec.describe Article, type: :model do
   describe "Model Methods" do
     context "feed" do
       it "is able to return both articles in default feed" do
-        article_holder = Article.default_feed(2)
+        article_holder = Article.fetch_articles(limit_num: 2)
         expect(article_holder.count).to eq(2)
       end
       it "is able to return the oldest article using update feed" do
-        article_holder = Article.update_feed("2019-01-16 18:28:01 -0500", 2)
+        article_holder = Article.fetch_articles(published_before: "2019-01-16 18:28:01 -0500", limit_num: 2)
         expect(article_holder.count).to eq(2)
         expect(article_holder[0].published_at.to_s).to include("2018-01-16 18:28:01 -0500")
         expect(article_holder[1].published_at.to_s).to include("2017-01-16 18:28:01 -0500")

@@ -7,19 +7,27 @@ class Outlet < ApplicationRecord
                                    dependent:   :destroy
 	has_many :followers, through: :passive_relationships, source: :follower
 
-	#class methods
 	def self.preview_outlet_images(limit_num)
 	  Outlet.limit(limit_num).pluck(:imageurl)
 	end
 
-	#Instance Methods
-	#Show articles from a single outlet
-	def update_feed(published_at, limit_num)
-     	  Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles.where('articles.published_at < ?', published_at.to_datetime).references(:articles).limit(limit_num)
+	def fetch_articles(published_before: nil, limit_num: 6)
+		if published_before
+			articles = Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles
+			                 .where('articles.published_at < ?', published_before.to_datetime).references(:articles)
+		else
+			articles = Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles
+		end
+		articles.limit(limit_num)
 	end
 
-  	#Show articles from a single outlet
-	def default_feed(limit_num)
-	  Outlet.includes(:articles).find_by_outlet_name(self.outlet_name).articles.limit(limit_num)
+	def self.fetch_outlets(outlet: nil, limit_num: 6)
+		if outlet
+			outlets = Outlet.where("outlet_name > ?", outlet).limit(limit_num)
+		else
+			outlets = Outlet.limit(limit_num)
+		end
+		outlets
 	end
+
 end

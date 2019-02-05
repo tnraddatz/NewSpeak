@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'spec_helper'
 RSpec.describe RelationshipsController, type: :controller do
   fixtures :relationships, :users, :outlets
 

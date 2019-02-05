@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
     context "redirects" do
       it "should redirect following when not logged in" do
         get :following, params:{id: @user.id}
-        expect(response).to redirect_to(new_user_registration_url)
+        expect(response).to redirect_to(new_user_session_url)
       end
       it "should redirect users path when not logged in" do
         get :show, params:{id: @user.id}

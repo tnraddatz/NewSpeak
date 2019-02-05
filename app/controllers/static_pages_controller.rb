@@ -1,20 +1,12 @@
  class StaticPagesController < ApplicationController
 
    def home
-     if params[:feed_data]
-       @articles = Article.update_feed(params[:feed_data], 5)
-     else
-       @articles = Article.default_feed(10)
-       @outlet_images = Outlet.preview_outlet_images(10)
-     end
-     respond_to do |format|
-       format.html
-       format.js
-     end
+     @outlet_images = Outlet.preview_outlet_images(10)
+     @articles = Article.fetch_articles(published_before: params[:feed_data], limit_num: 9)
+     respond_to :html, :js
    end
 
    def about
-
    end
 
 

@@ -26,23 +26,23 @@ RSpec.describe Outlet, type: :model do
   describe "Model Methods" do
     context "feed" do
       it "should not contain articles from another source" do
-        article_holder = @outlet.default_feed(3)
+        article_holder = @outlet.fetch_articles(limit_num: 3)
         article_holder.each do |article|
           expect(article.outlet_name).to include("CNN")
         end
       end
       it "should return max amount of articles regardless of limit parameter" do
-        article_holder = @outlet.update_feed("2019-01-16 18:28:01 -0500", 100)
+        article_holder = @outlet.fetch_articles(published_before: "2019-01-16 18:28:01 -0500", limit_num: 100)
         expect(article_holder.count).to eq(1)
-        article_holder = @outlet.default_feed(100)
+        article_holder = @outlet.fetch_articles(limit_num:100)
         expect(article_holder.count).to eq(2)
       end
       it "is able to return both articles in default feed" do
-        article_holder = @outlet.default_feed(2)
+        article_holder = @outlet.fetch_articles(limit_num: 2)
         expect(article_holder.count).to eq(2)
       end
-      it "is able to return the oldest article using update feed" do
-        article_holder = @outlet.update_feed("2019-01-16 18:28:01 -0500", 1)
+      it "is able to return the oldest article using fetch_articles" do
+        article_holder = @outlet.fetch_articles(published_before: "2019-01-16 18:28:01 -0500", limit_num: 1)
         expect(article_holder.count).to eq(1)
         expect(article_holder[0].published_at.to_s).to include("2018-01-16 18:28:01 -0500")
       end

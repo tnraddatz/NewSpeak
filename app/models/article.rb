@@ -3,13 +3,13 @@ class Article < ApplicationRecord
   default_scope -> {order(published_at: :desc)}
   validates :url, presence: true, uniqueness: true
 
-  #Class Methods
-  def self.update_feed(published_at, limit_num)
-    Article.includes(:outlet).where('articles.published_at < ?', published_at.to_datetime).limit(limit_num)
-  end
-
-  def self.default_feed(limit_num)
-    Article.includes(:outlet).limit(limit_num)
+  def self.fetch_articles(published_before: nil, limit_num: 9)
+    if published_before
+      articles = includes(:outlet).where('articles.published_at < ?', published_before.to_datetime)
+    else
+      articles = includes(:outlet)
+    end
+    articles.limit(limit_num)
   end
 
 end
