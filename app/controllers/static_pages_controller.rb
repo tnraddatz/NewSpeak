@@ -9,5 +9,8 @@
    def about
    end
 
+   def download_resume
+     send_file("#{Rails.root}/public/Thomas_Raddatz.pdf")
+   end
 
 end

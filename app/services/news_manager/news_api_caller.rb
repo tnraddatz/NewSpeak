@@ -28,7 +28,7 @@ module NewsManager
 
 		def call
 			@articles = @newsapi.get_everything(sources: @str_list_of_sources,
-																							language: 'en', pageSize: 99)
+																							language: 'en', pageSize: 50)
 		end
 
   end
