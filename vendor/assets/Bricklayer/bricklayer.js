@@ -120,7 +120,7 @@ var Bricklayer;
             }
         };
         Container.prototype.getColumns = function () {
-            return this.element.querySelectorAll(":scope > ." + this.options.columnClassName);
+            return this.element.querySelectorAll(".bricklayer > ." + this.options.columnClassName);
         };
         Container.prototype.findMinHeightColumn = function () {
             var allColumns = toArray(this.getColumns());
@@ -129,7 +129,7 @@ var Bricklayer;
             return allColumns[heights.indexOf(minHeight)];
         };
         Container.prototype.getElementsInOrder = function () {
-            return this.element.querySelectorAll(":scope > *:not(." + this.options.columnClassName + "):not(." + this.options.rulerClassName + ")");
+            return this.element.querySelectorAll(".bricklayer > *:not(." + this.options.columnClassName + "):not(." + this.options.rulerClassName + ")");
         };
         Container.prototype.checkColumnCount = function (publish) {
             if (publish === void 0) { publish = true; }
